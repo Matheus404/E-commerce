@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorator="layout/ecommerceLayout">
+
+<head>
+	<title>E-commerce</title>
+
+</head>
+
+<section layout:fragment="conteudo">
+
+
+ <div class="container animated"> 
+ 
+ <div class="alert alert-dismissible alert-danger" th:if="${!#strings.isEmpty(error)}">
+  				<button type="button" class="close" data-dismiss="alert">&times;</button>
+  				<p th:text="${error}"></p>
+	</div>
+	<div class="alert alert-dismissible alert-success" th:if="${!#strings.isEmpty(sucesso)}">
+  				<button type="button" class="close" data-dismiss="alert">&times;</button>
+  				<p th:text="${sucesso}"></p>
+	</div>
+	<div class="row"  style="background-color:white; margin-top:20px; border-radius: 10px;">
+		
+		<div class="col-md-12">
+			<div class="col-md-6">
+				<h4><i>Produtos  Cadastrados </i></h4>
+			</div>
+			<div class="col-md-6">
+				<button class="btn btn-primary" data-toggle="modal" data-target="#modalCadastrarProduto" style="float:right; margin-top:15px;"> <i class="glyphicon glyphicon-plus"></i>Novo Produto</button>
+			</div>
+		</div>
+		<table class="table" id="produtosTable">
+			    <thead>
+			      <tr>
+			        <th>#</th>
+			        <th>Código</th>
+			        <th>Descrição</th>
+			        <th>Preço de compra</th>
+			        <th>Preço de venda </th>
+			        <th>#</th>
+			      </tr>
+			    </thead>
+			    <tbody>
+			      <tr th:each="produto,iterationStatus : ${produtos}">
+			        <td th:text="${iterationStatus.count}"></td>
+			        <td th:text="${produto.codigo}"> </td>
+			        <td th:text="${produto.descricao}"> </td>
+			        <td th:text="${produto.precoCompra}"></td>
+			        <td th:text="${produto.precoVenda}"></td>
+			        <td ><a th:href="@{/Produto/Editar/{idProduto}(idProduto=${produto.id})}"><button type="button" class="btn btn-primary" >Editar</button></a></td>		         			        
+			        <td ><a th:href="@{/Produto/Deletar/{idProduto}(idProduto=${produto.id})}"><button type="button" class="btn btn-danger">Deletar</button></a></td>
+			        
+			      </tr>
+			     
+			    </tbody>
+			  </table>
+		
+		</div>
+	
+ </div>
+ 	<div class="modal fade" id="modalCadastrarProduto" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		   		<form th:fragment="consultaModal" class="form-horizontal" id ="modalForm" th:action="@{/Produto/Cadastrar/}" method="post">
+				 
+				    <div class="modal-header">
+				      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				        <span aria-hidden="true">&times;</span>
+				      </button>
+				      <h4 class="modal-title" id="myModalLabel">Cadastrar Produto</h4>
+				    </div>	
+				    
+				    <div>
+				    	<div class="row">
+				    	<input type="hidden" name="id" />
+				    	<div class="col-md-12">
+				    		<div class="col-sm-2"><label for="codigo" class="col-md-2 control-label">Codigo</label></div>
+				    		<div class="col-md-6"><input type="text" class="numeric form-control" name="codigo" required="required" /></div>
+				    	</div>				    
+				   
+				    	<div class="col-md-12">
+				    		<label for="descricao" class="col-lg-2 control-label">Descrição</label>
+				    		<div class="col-md-6"> <input type="text" class="form-control" name="descricao" required="required" /></div>
+				    	</div>				    
+				  
+				    	<div class="col-md-12">
+				    		<label for="precoCompra" class="col-lg-2 control-label">Preço de Compra</label>
+				    		<div class="col-md-6"><input type="text" class="numeric form-control" name="precoCompra" required="required"  /></div>
+				    	</div>				    
+				    
+				    	<div class="col-md-12">
+				    		<label for="precoVenda" class="col-lg-2 control-label"  >Preço de Venda</label>
+				    		<div class="col-md-6"><input type="text" class="numeric form-control" name="precoVenda" required="required"  /></div>
+				    	</div>				    
+				   
+				    <div class="form-group">
+				      <div class="modal-footer" id="modalBtns">
+				      	<div class="col-md-8">
+				      		 <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+				            <button type="submit" class="btn btn-success" id="btnAgendar">Cadastrar</button>
+				      	</div>
+				           
+				      </div>
+				    </div>
+				    </div>
+				    
+				    </div>
+				   				    
+				    
+				   
+				</form>
+				</div>
+		    </div>
+		  </div>
+		
+
+
+</section>
+</html>

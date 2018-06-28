@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/ecommerceLayout.html}">
+
+<head>
+	<title>E-commerce - Novo Cliente</title>
+</head>
+
+<section layout:fragment="conteudo">
+
+ <div class="container animated fadeInRight"> 
+ 	
+ 	    <div class="col-md-12">
+	        <div class="panel panel-bluegray">
+	          <div class="panel-heading">
+	            <a class="panel-title" data-toggle="collapse" data-target="#cadastrarCliente">
+	            	<i class="fa fa-caret-down" aria-hidden="true"></i> 
+	            	Cadastro de cliente
+	            </a>
+	          </div>
+	 
+	          <div id="cadastrarCliente" class="panel-body collapse in">
+		       	<form id="cadastroCliente" class="form-horizontal" enctype="multipart/form-data" th:action="@{/Admin/Cliente/Cadastrar}" method="post">
+					<input type="hidden" th:value="${cliente.id}" name="id"></input>
+					
+					<div class="container">
+
+						<div class="row">
+							<label for="nome" class="col-md-2 control-label"> <strong><span style='color:red;'>*</span>Nome:</strong></label>
+	     						
+	     						<div class="col-md-8">
+	       							<input class="form-control" placeholder="Digite o nome do cliente" id="nome" name="nome" th:value="${cliente.nome}"></input>
+	       							<span class="help-block"></span>
+	     						</div>
+						</div>
+						<div class="row">
+							<div class="form-group">
+		     					<label for="cpf" class="col-md-2 control-label"> <strong>CPF:</strong></label>
+		     					<div class="col-md-2">
+		       					<input class="form-control cpf" placeholder="Digite o CPF do cliente" id="cpf" name="cpf" th:value="${cliente.cpf}" required="required"></input>
+		       					<span class="help-block"></span>
+		     					</div>
+	   						</div>
+						</div>
+						
+						<div class="row">
+							<label for="email" class="col-md-2 control-label"> <strong>Email:</strong></label>
+	     					<div class="col-md-5">
+	       					<input class="form-control email" type="email"  placeholder="Digite o Email do cliente" id="email" name="email" th:value="${cliente.email}" ></input>
+	       					<span class="help-block"></span>
+	     					</div>
+						</div>
+						
+					</div>
+				  
+	   				<div class="form-group pull-right">
+	     					<div class="col-sm-12">
+	       					<a th:href="@{/Admin/}"><button type="button" class="btn btn-default">Cancelar</button></a> 
+	       					<button type="submit" class="btn btn-success">Salvar</button>
+	     					</div>
+	   				</div>
+		          </form>
+	           </div>
+	        </div>
+	      </div>
+	    
+</div>
+		   
+</section>
+</html>

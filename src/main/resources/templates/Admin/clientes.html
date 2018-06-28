@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/ecommerceLayout.html}">
+
+<head>
+	<title>E-commerce - Clientes</title>
+</head>
+
+<section layout:fragment="conteudo">
+
+
+
+ <div class="container animated">
+		
+		<div class="alert alert-dismissible alert-danger" th:if="${!#strings.isEmpty(error)}">
+  				<button type="button" class="close" data-dismiss="alert">&times;</button>
+  				<p th:text="${error}"></p>
+	</div>
+	<div class="alert alert-dismissible alert-success" th:if="${!#strings.isEmpty(sucesso)}">
+  				<button type="button" class="close" data-dismiss="alert">&times;</button>
+  				<p th:text="${sucesso}"></p>
+	</div>
+		
+		<a th:href="@{/Admin/Cliente/Cadastrar}">
+      		<button type="button" class="btn btn-success btn-lg" data-dismiss="modal" style="margin-top:10px;">Adicionar Cliente</button>
+      	</a>
+      	 
+      <div id="clientes" class="col-md-12" style="background-color:white; margin-top:20px; border-radius: 10px;">
+ 		<table class="table" id="ClientesTable">
+		    <thead>
+		        <tr>
+					<th>Nome</th>
+					<th>Cpf</th>
+					<th>Email</th>
+					<th></th>
+		        </tr>
+		    </thead>
+		    <tbody>
+		    	<tr th:each="cliente : ${clientes}">
+		    		<td th:text="${cliente.nome}"></td>
+		    		<td th:text="${cliente.cpf}"></td>
+		    		<td th:text="${cliente.email}"></td>
+		    		<td style="text-align:center">
+		    			<a th:href="@{/Admin/Cliente/{idCliente}(idCliente=${cliente.id})}"><button type="button" class="btn btn-warning" >Editar</button></a>
+		    			<button type="button" class="btn btn-danger" th:onclick="'deletarCliente(' + ${cliente.id} + ')'" >Excluir</button>
+		    		</td>
+		    	</tr>
+		    </tbody>
+		</table>
+ 	</div>
+      	
+ </div>
+ 	
+ 	
+</section>
+</html>
